@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>[WoT Programming] question list</title>
+
+    <link href="applications_css/tutor.css" rel="stylesheet">
+    <link href="vendor/jquery-ui.cupertino.min.css" type="text/css" rel="stylesheet" />
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="vendor/jquery-1.11.2.min.js"></script>
+    <script src="vendor/jquery-ui.cupertino.min.js" type="text/javascript" ></script>
+    <script>
+        var store = {
+            "user": "<%= store.user %>",
+            "className": null,
+        },
+        socket = io.connect();
+    </script>
+    <script src="applications_js/tutor.js"></script>
+    <script>
+    </script>
+</head>
+<body>
+    <div class="ui-widget">
+        <div id="head" class="ui-widget-header">
+			<div id="classInfo">
+				<table id="selectClass">
+					<tr>
+						<th>クラス名</th>
+						<td><input type="text" id="className" name="className" /></td>
+					</tr>
+					<tr>
+						<th>パスワード</th>
+						<td><input type="password" id="password" name="password" /></td>
+						<td><button id="btnOK" type="button">OK</button></td>
+						<td><div id="msg"></div></td>
+					</tr>
+				</table>
+			</div>
+			<div id="barInfo">
+			  <div>User Name: <span id="userName"> </span></div>
+			</div>
+        </div>
+        <div id="content" class="ui-widget-content">
+            <div id="classNameDisp"></div>
+            <div id="qList"></div>
+        </div>
+
+    </div>
+	<div id="show_dialog"></div>
+</body>
+</html>

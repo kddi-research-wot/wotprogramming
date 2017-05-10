@@ -1,0 +1,206 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>WoT Programming</title>
+
+    <link type="text/css" rel="stylesheet" href="vendor/jquery-ui.cupertino.min.css" />
+    <link href="applications_css/main.css" rel="stylesheet" />
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="vendor/jquery-1.11.2.min.js"></script>
+    <script src="vendor/jszip.min.js"></script>
+    <script src="vendor/FileSaver.min.js"></script>
+    <script type="text/javascript" src="vendor/jquery-ui.cupertino.min.js"></script>
+    <script src="vendor/ace/ace.js" charset="utf-8"></script>
+    <script src="vendor/ace/ext-language_tools.js" charset="utf-8"></script>
+    <script src="vendor/loop-protect.js"></script>
+
+    <script>
+      var store = {
+      "user": "<%= store.user %>",
+      "url": "<%= store.url %>",
+      "className": null,
+      "qId": "<%= store.qId %>",
+      "tutor": <%= store.tutor %>,
+      "socketId": null
+      },
+      socket = io.connect();
+    </script>
+    <script src="applications_js/main.js"></script>
+  </head>
+  <body>
+    <div class="ui-widget">
+      <div id="header" class="ui-widget-header">
+        <ul id="menu">
+          <li>
+            <a>File</a>
+            <ul>
+              <li id="urlNewMenu">
+                <a href="javascript:void(0);">新規</a>
+              </li>
+              <li id="urlHistory">
+                <a href="javascript:void(0);">履歴</a>
+              </li>
+              <li id="uploadImageOpen">
+                <a href="javascript:void(0);">画像ファイル</a>
+              </li>
+              <li id="downloadMenu">
+                <a href="javascript:void(0);">ダウンロード</a>
+              </li>
+              <li id="classSetMenu">
+                <a href="javascript:void(0);">クラス参加</a>
+              </li>
+              <li id="signOut">
+                <a href="javascript:void(0);">GitHub Sign Out</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <div id="editorShowBtnGroup">
+          <label for="editorShowHTML" class="header-button-text">HTML</label>
+          <input type="checkbox" autocomplete="off" checked="checked" id="editorShowHTML" />
+          <label for="editorShowCSS" class="header-button-text">CSS</label>
+          <input type="checkbox" autocomplete="off" checked="checked" id="editorShowCSS" />
+          <label for="editorShowJS" class="header-button-text">JS</label>
+          <input type="checkbox" autocomplete="off" checked="checked" id="editorShowJS" />
+          <label for="editorShowConsole" class="header-button-text">Console</label>
+          <input type="checkbox" autocomplete="off" checked="checked" id="editorShowConsole" />
+          <label for="editorShowOutput" class="header-button-text">Output</label>
+          <input type="checkbox" autocomplete="off" checked="checked" id="editorShowOutput" />
+        </div>
+        <button id="btnQuestion" type="button" >質問</button>
+        <button id="btnQEnd" type="button">指導完了</button>
+        <div id="barInfo">
+          <div class="position">
+            Code Name:<input type="text" id="comment" name="comment" />
+          </div>
+          <div class="position">
+            User Name:<span id="userName"> </span>
+          </div>
+          <div class="position">
+            ClassName:<span id="className"> </span>
+          </div>
+        </div>
+      </div>
+      <div id="editorPanels" class="editor-panels">
+        <div class="resize-wrapper" id="resizeWrapper0">
+          <div class="editor-resize" id="editorResize0"></div>
+        </div>
+        <div class="resize-wrapper" id="resizeWrapper1">
+          <div class="editor-resize" id="editorResize1"></div>
+        </div>
+        <div class="resize-wrapper" id="resizeWrapper2">
+          <div class="editor-resize" id="editorResize2"></div>
+        </div>
+        <div class="resize-wrapper" id="resizeWrapper3">
+          <div class="editor-resize" id="editorResize3"></div>
+        </div>
+        <div class="editor-panel" id="editorPanelHTML">
+          <p class="text-info">HTML</p>
+          <p class="editing-label" id="editingLabelHTML"></p>
+          <div class="editor" id="editorHTML"></div>
+        </div>
+        <div class="editor-panel" id="editorPanelCSS">
+          <p class="text-info">CSS</p>
+          <p class="editing-label" id="editingLabelCSS"></p>
+          <div class="editor" id="editorCSS"></div>
+        </div>
+        <div class="editor-panel" id="editorPanelJS">
+          <p class="text-info">JS</p>
+          <p class="editing-label" id="editingLabelJS"></p>
+          <div class="editor" id="editorJS"></div>
+        </div>
+        <div class="editor-panel" id="editorPanelConsole">
+          <p class="text-info">Console</p>
+          <button id="clearConsoleLog">クリア</button>
+          <div class="log-outer">
+            <div class="panel-body" id="consoleLog"></div>
+          </div>
+        </div>
+        <div class="editor-panel" id="editorPanelOutput">
+          <p class="text-info">Output</p>
+          <button id="openViewWindow">別画面</button>
+          <div class="editor">
+            <iframe id="viewFrame" srcdoc="" frameborder="0">
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- DIALOG: chat -->
+    <div id="chatDialog" title="チャット" style="display: none; " class="dialog">
+      <div class="chat-log" id="chatLog"></div>
+      <div class="chat-send">
+        <input type="text" class="chat-send-msg" id="chatSendMsg" maxlength="200" />
+        <button id="chatSendBtn">Send</button>
+        <button id="chatVoice">Voice</button>
+		<p class="typing-label" id="typingLabel"></p>
+      </div>
+    </div>
+    <!-- DIALOG: class SET -->
+    <div id="classSetDialog" title="クラス参加" style="display: none; " class="dialog">
+      <table>
+        <tr>
+          <th>クラス名</th>
+          <td>
+            <input type="text" id="classNameSet" />
+          </td>
+        </tr>
+        <tr>
+          <th>パスワード</th>
+          <td>
+            <input type="password" id="classPasswordSet" />
+          </td>
+        </tr>
+      </table>
+      <div id="classSetMsg"></div>
+    </div>
+    <!-- DIALOG: question -->
+    <div id="questionDialog" title="質問" style="display: none; " class="dialog">
+      <table>
+        <tr>
+          <td>
+            <textarea cols="20" rows="20"  id="questionContent"></textarea>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <!-- Voice chat -->
+    <div id="voicechatDialog" title="音声チャット" style="display: none; " class="dialog">
+		<div style="text-align: center;" id="voicechatMsg"></div>
+		<div style="text-align: center;"><br>
+	        <button id="CallBtn">承認</button>
+	        <button id="CancelBtn">Cancel</button>
+		</div>
+    </div>
+    <section id="audios"></section>
+    <!-- DIALOG: URL History -->
+    <div id="urlHistoryDialog" title="履歴" style="display: none; " class="dialog">
+      <div id="uList"></div>
+    </div>
+    <!-- DIALOG: Upload Image -->
+    <div id="uploadImageDialog" title="画像ファイル" style="display: none; " class="dialog">
+	  <label for="fileInput" class="chooseImage ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+	  画像選択
+	  <input type="file" name="imagefiles" accept=".jpg,.gif,.png,image/gif,image/jpeg,image/png" id="fileInput" style="display:none;">
+	  </label><input type="text" id="choosedFile" readonly="" />
+	  <button type="button" id="btnImageUpload">アップロード</button><br><br>
+
+      <div id="imageList"></div>
+
+    </div>
+	<!-- DIALOG: Message -->
+    <div id="messageDialog" title="メッセージ" style="display: none; " class="dialog">
+      <div id="messageText"></div>
+    </div>
+
+	<!-- DIALOG: Confirm -->
+    <div id="confirmDialog" title="メッセージ" style="display: none; " class="dialog">
+      <div id="confirmText"></div>
+    </div>
+
+  </body>
+</html>

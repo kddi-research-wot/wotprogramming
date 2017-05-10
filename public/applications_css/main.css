@@ -1,0 +1,311 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-size: 12px;
+    height: 100%;
+    overflow: hidden;
+}
+
+a {
+    text-decoration: none;
+}
+a:link,a:visited {
+    color: inherit;
+}
+th {
+    text-align: left;
+}
+
+#header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding-top: 2px;
+    z-index: 100;
+    padding: 5px 5px 0px 5px;
+}
+#menu {
+    position: relative;
+    float:left;
+    margin-left: 2px;
+    width: 50px;
+    z-index: 99999;
+    margin-right: 20px;
+    margin-bottom: 5px;
+}
+.ui-menu {
+    width: 140px;
+}
+
+#editorShowBtnGroup {
+    position: relative;
+    float:left;
+    margin-bottom: 5px;
+}
+#btnQuestion {
+    position: relative;
+    float:left;
+    margin-left: 20px;
+}
+
+
+
+#barInfo {
+    position: relative;
+    float: right;
+    margin: 5px 10px 5px 0px;
+}
+
+#barInfo .position {
+    float: left;
+}
+
+#barInfo .position #className {
+    margin: 0px 10px;
+}
+
+#barInfo .position #userName {
+    margin: 0px 10px;
+}
+
+#barInfo .position input {
+    margin: 0px 10px;
+    border: 1px solid #ddd;
+}
+
+#editorPanels {
+    position: absolute;
+    top: 42px;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+.editor-panel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 90px;
+    border:solid 1px #ddd;
+    overflow: hidden;
+
+    padding: 0px;
+    margin: 0px;
+}
+
+.ace_scrollbar-v {
+    overflow-y: auto;
+}
+
+.ace_scrollbar-h {
+    overflow-x: auto;
+}
+
+.text-info {
+    margin: 7px 10px;
+
+}
+
+
+.editor {
+    position:relative;
+    width: 100%;
+    height: 100%;
+    margin-right: 1px;
+}
+.editing-label {
+    position: absolute;
+    top: 0;
+    left: 80px;
+}
+
+.editor-resize {
+    position: absolute;
+    display: block;
+    top: 0px;
+    bottom: 0px;
+
+    right: auto;
+    opacity: 1;
+    cursor: ew-resize;
+
+    width: 4px;
+    height: 100%;
+    z-index: 90;
+
+    background: #ccc url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAMCAYAAACnfgdqAAAAMElEQVQIHWP8//8/AxRoMAA5ZkDcAsT/mYCiN4GYBYidGIECUFUMDCAZOEDmUNkAAKKgK80+TE8oAAAAAElFTkSuQmCC) no-repeat 25% 45%;
+    -webkit-transition: opacity ease-in 50ms;
+    -moz-transition: opacity ease-in 50ms;
+    -o-transition: opacity ease-in 50ms;
+    transition: opacity ease-in 50ms;
+
+}
+
+.editor-resize:hover {
+    cursor: w-resize;
+
+    background: #bac3e8 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAMCAYAAACnfgdqAAAAMElEQVQIHWP8//8/AxRoMAA5ZkDcAsT/mYCiN4GYBYidGIECUFUMDCAZOEDmUNkAAKKgK80+TE8oAAAAAElFTkSuQmCC) no-repeat 25% 45%;
+
+}
+
+.resize-wrapper {
+    position: absolute;
+    display: block;
+    top: 0px;
+    bottom: 0px;
+
+}
+
+
+#clearConsoleLog {
+    position: absolute;
+    top: 0;
+    right: 2px;
+}
+
+.panel-body {
+    overflow: auto;
+    margin-left: 1px;
+}
+
+#openViewWindow {
+    position: absolute;
+    top: 0;
+    right: 2px;
+}
+.chat-wrapper {
+    width: 100%;
+}
+
+#chatDialog {
+    position: relative;
+    margin: 10px;
+    width: 100%;
+    height: 100%;
+    overflow:hidden;
+}
+.chat-log {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    left: 0;
+    bottom: 50px;
+    overflow: scroll;
+}
+.chat-send {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    height: 50px;
+}
+.chat-send-msg {
+    min-width: 100px;
+}
+
+#questionContent {
+    width: 470px;
+    height: 170px;
+}
+
+
+textarea {
+}
+
+.ui-button-text-only .ui-button-text {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.dialog {
+    position: absolute;
+    z-index: 100;
+}
+
+#btnQEnd {
+    margin-left: 10px;
+}
+
+#uList a:hover {
+    color: #748ae4
+}
+
+#historyTable {
+ border-collapse: collapse;
+ border-spacing: 5px;
+ width: 100%;
+}
+
+#historyTable tr:hover td {
+    transition: 0.5s;
+    background-color: #dfe9fc;
+    color: #748ae4;
+}
+
+#historyTable td {
+ border: 0px;
+ padding: 2px 5px;
+}
+
+#historyTable th {
+ border: 0px;
+ padding: 2px 5px;
+}
+
+#historyTable .number {
+ text-align: right;
+}
+
+.chooseImage {
+  padding: 6px 10px 6px 15px;
+}
+
+#choosedFile {
+    margin: 0px 5px;
+    width: 300px;
+    height: 20px;
+    border: 1px solid #bac3e8;
+    padding-left: 5px;
+}
+
+#imageTable {
+ border-collapse: collapse;
+ border-spacing: 5px;
+ width: 100%;
+}
+
+#imageTable th {
+ border: 0px;
+ padding: 2px 5px;
+}
+
+#imageTable td {
+ border: 0px;
+ padding: 2px 5px;
+}
+
+#imageTable tr:hover td {
+    transition: 0.5s;
+    background-color: #dfe9fc;
+    color: #748ae4;
+}
+
+.thumbnail .imageSize {
+    width: auto;
+    height: auto;
+    max-width: 80px;
+    max-height: 30px;
+}
+
+#confirmText .imageSize {
+    width: auto;
+    height: auto;
+    max-width: 300px;
+    max-height: 150px;
+}
+
+.imageDeleteBtn {
+    padding: 4px 6px;
+}
