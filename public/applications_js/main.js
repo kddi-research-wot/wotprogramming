@@ -46,6 +46,7 @@ var main = (function ($, socket) {
   var voiceUserList = [];
 
   var approveVoiceChat = false;
+  var voiceChatWindow = null;
   var keepSending = false;
 
     // 画面サイズ関連
@@ -770,6 +771,7 @@ var main = (function ($, socket) {
       if (approveVoiceChat) {
                 // 開始
         $("#voicechatDialog").dialog("close");
+        voiceChatWindow = window.open("https://" + document.location.hostname + "/" + "voicechat?user=" + store.user + "&senduser=" + data.senduser + "&receiveuser=" + data.receiveuser + "&url=" + store.url, "voicechat");
         socket.emit("voice-call-close", getEmitData());
       }
     });
