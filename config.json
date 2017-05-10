@@ -1,0 +1,13 @@
+{
+    "SERVER_URL" : "localhost:3200",
+    "GITHUB" : {
+        "CLIENT_ID" : "xxxxxxxxxxxxxxxxxxx",
+        "CLIENT_SECRET" : "yyyyyyyyyyyyyyyyyyyyy"
+    },
+    "MYSQL" : {
+        "host": "localhost",
+        "user": "wotpro",
+        "password": "user_password",
+        "database": "wotpro_database"
+    }
+}
